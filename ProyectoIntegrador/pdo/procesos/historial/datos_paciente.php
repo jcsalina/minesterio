@@ -1,4 +1,12 @@
 <?php
+function get_edad($fecha_nacimiento) {
+    $cumpleanos = new DateTime($fecha_nacimiento);
+    $hoy = new DateTime();
+    $annos = $hoy->diff($cumpleanos);
+    return $annos->y;
+};
+
+$paciente_id;
 $paciente_cedula;
 $paciente_nombre = "";
 $paciente_apellido;
@@ -14,6 +22,7 @@ $paciente_nacionalidad;
 $paciente_etnia;
 $paciente_captacion;
 $paciente_pertenece_distrito;
+$paciente_edad;
 
 if(isset($_GET['cedula'])) {
     $cedula = $_GET['cedula'];
@@ -42,7 +51,7 @@ if(isset($_GET['cedula'])) {
             } else {
                 $pertenece_distrito_display = "No Pertenece";
             }
-
+            $paciente_id                 = $fila["id"];
             $paciente_cedula             = $fila["paciente_cedula"];
             $paciente_nombre             = $fila["paciente_nombre"];
             $paciente_apellido           = $fila["paciente_apellido"];
@@ -58,6 +67,9 @@ if(isset($_GET['cedula'])) {
             $paciente_etnia              = $fila["paciente_etnia"];
             $paciente_captacion          = $fila["paciente_captacion"];
             $paciente_pertenece_distrito = $pertenece_distrito_display;
+            $paciente_edad               = get_edad($paciente_fecha_nacimiento);
+
+            
         }
     }
 }

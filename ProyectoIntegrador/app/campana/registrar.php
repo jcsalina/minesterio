@@ -57,11 +57,8 @@
                             </div>
                             <div class="panel-body">
                                 <!-- Form Registrar Campaña -->
-                                <!-- Comming Soon! -->
-                                <div style="width: 100%; text-align:center;">
-                                    <h2>Comming Soon!</h2>
-                                    <img src="../../img/sources/working_on_page.gif" alt="Working on it!" style="height: 35vh;margin: 0 auto;margin-bottom: 5vh;">
-                                </div>
+                                <?php require_once "../../pdo/php/connect.php";?>
+                                <?php include '../../app/campana/registrar_form.php';?>
                             </div>
                         </div>
                     </div>

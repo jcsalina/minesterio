@@ -53,11 +53,33 @@
                                     <a class="btn btn-success" href="registrar.php"> <i class="fa fa-plus"></i> Nueva Cita Medica</a>
                                 </div>
                             </div>
+                            <?php
+                                require_once "../../pdo/php/connect.php";
+                            ?>
+                            <?php 
+                                if(isset($_GET['id'])){
+                                    require_once "../../pdo/procesos/campana/eliminar.php";
+                                }
+                            ?>
                             <div class="panel-body">
-                                <!-- Comming Soon! -->
-                                <div style="width: 100%; text-align:center;">
-                                    <h2>Comming Soon!</h2>
-                                    <img src="../../img/sources/working_on_page.gif" alt="Working on it!" style="height: 35vh;margin: 0 auto;margin-bottom: 5vh;">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover">
+                                        <thead class="success">
+                                            <tr>
+                                                <th>Cédula</th>
+                                                <th>Nombre</th>
+                                                <th>Fecha de Cita</th>
+                                                <th>Estado</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                                include "../../pdo/procesos/citamedica/listar.php";
+                                            ?>
+                                            
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <!-- Paginacion -->
                             </div>

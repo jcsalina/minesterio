@@ -22,33 +22,56 @@ CREATE TABLE IF NOT EXISTS `agendamiento` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `paciente_id` int(11) NOT NULL,
   `fecha_cita` timestamp NULL DEFAULT NULL,
+  `estado` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `paciente_id` (`paciente_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Dumping data for table proyectoministerio.agendamiento: ~2 rows (approximately)
+-- Dumping data for table proyectoministerio.agendamiento: ~3 rows (approximately)
 /*!40000 ALTER TABLE `agendamiento` DISABLE KEYS */;
-REPLACE INTO `agendamiento` (`id`, `paciente_id`, `fecha_cita`) VALUES
-	(1, 1, '2018-12-12 07:45:00'),
-	(2, 1, '2018-12-20 10:40:00');
+REPLACE INTO `agendamiento` (`id`, `paciente_id`, `fecha_cita`, `estado`) VALUES
+	(1, 1, '2018-12-12 07:45:00', 'Completada'),
+	(2, 1, '2018-12-20 10:40:00', 'Pendiente'),
+	(3, 1, '2019-02-20 19:41:56', 'Agendada');
 /*!40000 ALTER TABLE `agendamiento` ENABLE KEYS */;
 
 -- Dumping structure for table proyectoministerio.campana
 DROP TABLE IF EXISTS `campana`;
 CREATE TABLE IF NOT EXISTS `campana` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(11) NOT NULL,
+  `nombre` varchar(30) NOT NULL,
   `fecha_inicio` date NOT NULL,
   `fecha_fin` date NOT NULL,
   `edad` int(11) NOT NULL,
   `estado` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  `vacuna_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_vacuna` (`vacuna_id`),
+  CONSTRAINT `vacuna_id` FOREIGN KEY (`vacuna_id`) REFERENCES `vacuna` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
--- Dumping data for table proyectoministerio.campana: ~0 rows (approximately)
+-- Dumping data for table proyectoministerio.campana: ~19 rows (approximately)
 /*!40000 ALTER TABLE `campana` DISABLE KEYS */;
-REPLACE INTO `campana` (`id`, `nombre`, `fecha_inicio`, `fecha_fin`, `edad`, `estado`) VALUES
-	(1, 'H1N1', '2019-01-02', '2019-01-30', 2, 1);
+REPLACE INTO `campana` (`id`, `nombre`, `fecha_inicio`, `fecha_fin`, `edad`, `estado`, `vacuna_id`) VALUES
+	(1, 'BCG', '2019-01-02', '2019-01-30', 5, 1, 0),
+	(2, 'HBO', '2019-01-18', '2019-01-18', 3, 1, 0),
+	(3, 'Rotavirus 1', '2019-01-02', '2019-07-25', 2, 1, 0),
+	(4, 'Rotavirus 2', '2019-01-01', '2019-05-11', 8, 1, 0),
+	(5, 'Pentavalente 1', '2019-01-20', '2029-01-20', 2, 1, 0),
+	(6, 'Pentavalente 2', '2019-01-20', '2029-01-20', 4, 1, 0),
+	(7, 'Pentavalente 3', '2019-01-20', '2029-01-20', 6, 1, 0),
+	(8, 'Poliomielitis 1', '2019-01-20', '2039-01-20', 3, 1, 0),
+	(9, 'Poliomielitis 2', '2019-01-20', '2022-01-20', 4, 1, 0),
+	(10, 'Poliomielitis 3', '2019-01-20', '2022-01-20', 5, 1, 0),
+	(11, 'Neumococo 1', '2019-01-20', '2021-04-20', 5, 1, 0),
+	(12, 'Neumococo 2', '2019-01-20', '2021-04-20', 6, 1, 0),
+	(13, 'Neumococo 3', '2019-01-20', '2025-01-20', 7, 1, 0),
+	(14, 'SR', '2019-01-20', '2021-01-20', 6, 1, 0),
+	(15, 'SRP', '2019-01-20', '2022-01-20', 4, 1, 0),
+	(16, 'Varicela', '2019-01-20', '2022-04-20', 3, 1, 0),
+	(17, 'FA', '2019-01-20', '2022-06-25', 2, 1, 0),
+	(18, 'OPV', '2019-01-20', '2023-07-02', 3, 1, 0),
+	(19, 'Influenza', '2019-01-20', '2021-07-26', 1, 1, 0);
 /*!40000 ALTER TABLE `campana` ENABLE KEYS */;
 
 -- Dumping structure for table proyectoministerio.captacion
@@ -113,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `control` (
 -- Dumping data for table proyectoministerio.control: ~1 rows (approximately)
 /*!40000 ALTER TABLE `control` DISABLE KEYS */;
 REPLACE INTO `control` (`id`, `paciente_id`, `BCG`, `HBO`, `rotavirus1`, `rotavirus2`, `pentavalente1`, `pentavalente2`, `pentavalente3`, `poliomielitis1`, `poliomielitis2`, `poliomielitis3`, `neumococo1`, `neumococo2`, `neumococo3`, `SR`, `SRP`, `varicela`, `FA`, `OPV`, `Influenza`) VALUES
-	(1, 3, NULL, NULL, '2019-01-08', '2019-01-08', '2019-01-08', '2019-01-08', NULL, '2019-01-08', NULL, NULL, NULL, NULL, NULL, '2019-01-08', NULL, NULL, NULL, NULL, '2019-01-08');
+	(1, 3, '2019-01-21', '2019-01-21', '2019-01-21', '2019-01-21', '2019-01-21', '2019-01-21', NULL, '2019-01-21', NULL, NULL, NULL, NULL, NULL, '2019-01-21', NULL, NULL, NULL, NULL, NULL);
 /*!40000 ALTER TABLE `control` ENABLE KEYS */;
 
 -- Dumping structure for table proyectoministerio.controlcampana
@@ -126,12 +149,14 @@ CREATE TABLE IF NOT EXISTS `controlcampana` (
   PRIMARY KEY (`id`),
   KEY `controlcampana_paciente_id` (`paciente_id`),
   KEY `controlcampana_campana_id` (`campana_id`),
-  CONSTRAINT `controlcampana_paciente_id` FOREIGN KEY (`paciente_id`) REFERENCES `paciente` (`id`),
-  CONSTRAINT `controlcampana_campana_id` FOREIGN KEY (`campana_id`) REFERENCES `campana` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  CONSTRAINT `controlcampana_campana_id` FOREIGN KEY (`campana_id`) REFERENCES `campana` (`id`),
+  CONSTRAINT `controlcampana_paciente_id` FOREIGN KEY (`paciente_id`) REFERENCES `paciente` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Dumping data for table proyectoministerio.controlcampana: ~0 rows (approximately)
+-- Dumping data for table proyectoministerio.controlcampana: ~1 rows (approximately)
 /*!40000 ALTER TABLE `controlcampana` DISABLE KEYS */;
+REPLACE INTO `controlcampana` (`id`, `paciente_id`, `campana_id`, `fecha_suministro`) VALUES
+	(1, 3, 2, '2019-01-11');
 /*!40000 ALTER TABLE `controlcampana` ENABLE KEYS */;
 
 -- Dumping structure for table proyectoministerio.empleado
@@ -148,9 +173,9 @@ CREATE TABLE IF NOT EXISTS `empleado` (
   KEY `cedula_persona_empleado` (`cedula_persona`),
   CONSTRAINT `cargo_id` FOREIGN KEY (`cargo_id`) REFERENCES `cargo` (`id`),
   CONSTRAINT `cedula_persona_empleado` FOREIGN KEY (`cedula_persona`) REFERENCES `persona` (`cedula`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
--- Dumping data for table proyectoministerio.empleado: ~6 rows (approximately)
+-- Dumping data for table proyectoministerio.empleado: ~7 rows (approximately)
 /*!40000 ALTER TABLE `empleado` DISABLE KEYS */;
 REPLACE INTO `empleado` (`id`, `cedula_persona`, `usuario`, `clave`, `estado`, `cargo_id`) VALUES
 	(1, '0803106509', 'pcmacias', 'pcmacias123', '0', 2),
@@ -158,7 +183,8 @@ REPLACE INTO `empleado` (`id`, `cedula_persona`, `usuario`, `clave`, `estado`, `
 	(3, '0930442447', 'jimdgonz', 'jimdgonz123', '1', 2),
 	(4, '1600470437', 'msanchez', 'marcelo123', '1', 1),
 	(5, '1234567890', 'jpiguave', 'qwertyuiop', '1', 2),
-	(11, '1600222437', 'ftrabubu', 'ftrabubu123', '1', 1);
+	(11, '1600222437', 'ftrabubu', 'ftrabubu123', '1', 1),
+	(12, '1293454394', 'jpastor', 'jpastor1233', '1', 2);
 /*!40000 ALTER TABLE `empleado` ENABLE KEYS */;
 
 -- Dumping structure for table proyectoministerio.etnia
@@ -194,10 +220,30 @@ CREATE TABLE IF NOT EXISTS `historial` (
   KEY `empleado_id` (`empleado_id`),
   CONSTRAINT `empleado_id_historial` FOREIGN KEY (`empleado_id`) REFERENCES `empleado` (`id`),
   CONSTRAINT `paciente_id_historial` FOREIGN KEY (`paciente_id`) REFERENCES `paciente` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table proyectoministerio.historial: ~0 rows (approximately)
 /*!40000 ALTER TABLE `historial` DISABLE KEYS */;
+REPLACE INTO `historial` (`id`, `paciente_id`, `empleado_id`, `fecha`) VALUES
+	(1, 3, 4, '2019-01-21 11:40:54'),
+	(2, 3, 4, '2019-01-21 11:59:02'),
+	(3, 3, 4, '2019-01-21 12:07:09'),
+	(4, 3, 4, '2019-01-21 12:07:18'),
+	(5, 3, 4, '2019-01-21 12:07:26'),
+	(6, 3, 4, '2019-01-21 12:09:30'),
+	(7, 3, 4, '2019-01-21 12:09:40'),
+	(8, 3, 4, '2019-01-21 12:11:50'),
+	(9, 3, 4, '2019-01-21 12:13:33'),
+	(10, 3, 4, '2019-01-21 12:15:29'),
+	(11, 3, 4, '2019-01-21 12:16:29'),
+	(12, 3, 4, '2019-01-21 12:16:35'),
+	(13, 3, 4, '2019-01-21 12:28:18'),
+	(14, 3, 4, '2019-01-21 12:30:02'),
+	(15, 3, 4, '2019-01-21 12:33:35'),
+	(16, 3, 4, '2019-01-21 12:39:14'),
+	(17, 3, 4, '2019-01-21 12:39:14'),
+	(18, 3, 4, '2019-01-21 12:41:55'),
+	(19, 3, 4, '2019-01-21 12:41:55');
 /*!40000 ALTER TABLE `historial` ENABLE KEYS */;
 
 -- Dumping structure for table proyectoministerio.insumo
@@ -278,8 +324,8 @@ CREATE TABLE IF NOT EXISTS `paciente` (
 /*!40000 ALTER TABLE `paciente` DISABLE KEYS */;
 REPLACE INTO `paciente` (`id`, `cedula_persona`, `fecha_nacimiento`, `sexo_id`, `cedula_padre`, `nombre_padre`, `cedula_madre`, `nombre_madre`, `etnia_id`, `nacionalidad_id`, `captacion_id`, `estado`, `pertenencia_distrito`) VALUES
 	(1, '0803106509', '2018-12-26', 2, '0299848567', 'Marco', '0923453232', 'Patricia', 6, 1, 1, '1', 1),
-	(2, '0177327281', '1991-01-03', 1, '0459338292', 'Andres', '0739493812', 'Julia', 1, 1, 2, '', 1),
-	(3, '0185739911', '1981-01-03', 2, '0324285739', 'Francisco', '0924927131', 'Fatima', 5, 1, 1, '', 1);
+	(2, '0177327281', '1991-01-03', 1, '0459338292', 'Andres', '0739493812', 'Julia', 6, 4, 2, '1', 2),
+	(3, '0185739911', '2015-01-03', 2, '0324285739', 'Francisco', '0924927131', 'Fatima', 5, 1, 1, '1', 1);
 /*!40000 ALTER TABLE `paciente` ENABLE KEYS */;
 
 -- Dumping structure for table proyectoministerio.persona
@@ -294,9 +340,9 @@ CREATE TABLE IF NOT EXISTS `persona` (
   `telefono` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `cedula` (`cedula`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
--- Dumping data for table proyectoministerio.persona: ~9 rows (approximately)
+-- Dumping data for table proyectoministerio.persona: ~10 rows (approximately)
 /*!40000 ALTER TABLE `persona` DISABLE KEYS */;
 REPLACE INTO `persona` (`id`, `cedula`, `nombre`, `apellido`, `correo`, `direccion`, `telefono`) VALUES
 	(1, '0803106509', 'Patricia', 'Macias', 'patmac_19@hotmail.com', 'Via a la Costa Km 5 1/2', '0990058425'),
@@ -307,7 +353,8 @@ REPLACE INTO `persona` (`id`, `cedula`, `nombre`, `apellido`, `correo`, `direcci
 	(6, '1234567890', 'Juan', 'Piguave', 'jpiguave@maill.com', 'Vernaza', '0925436676'),
 	(7, '1600222437', 'Frank', 'Trabubu', 'ftbb@maill.com', 'Kennedy Norte', '0984334567'),
 	(10, '0177327281', 'Mario', 'Sanders', 'msanders@mail.com', 'Alborada V Etapa', '0984534504'),
-	(11, '0185739911', 'Julia', 'Lajas', 'jlajas@mail.com', 'Samanes 1', '0982948298');
+	(11, '0185739911', 'Julia', 'Lajas', 'jlajas@mail.com', 'Samanes 1', '0982948298'),
+	(12, '1293454394', 'Juan', 'Pastor', 'jpastor@mail.com', 'Urdenor', '0934323454');
 /*!40000 ALTER TABLE `persona` ENABLE KEYS */;
 
 -- Dumping structure for table proyectoministerio.sexo
@@ -337,10 +384,13 @@ CREATE TABLE IF NOT EXISTS `stockinsumo` (
   PRIMARY KEY (`id`),
   KEY `id_insumo` (`id_insumo`),
   CONSTRAINT `id_insumo` FOREIGN KEY (`id_insumo`) REFERENCES `insumo` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Dumping data for table proyectoministerio.stockinsumo: ~0 rows (approximately)
+-- Dumping data for table proyectoministerio.stockinsumo: ~2 rows (approximately)
 /*!40000 ALTER TABLE `stockinsumo` DISABLE KEYS */;
+REPLACE INTO `stockinsumo` (`id`, `lote`, `cantidad`, `fecha_ingreso`, `fecha_expiracion`, `id_insumo`) VALUES
+	(1, 2, '20', '2019-01-02 06:54:24', '2019-03-18 06:54:43', 1),
+	(2, 3, '30', '2019-01-10 06:55:52', '2019-11-18 06:56:05', 8);
 /*!40000 ALTER TABLE `stockinsumo` ENABLE KEYS */;
 
 -- Dumping structure for table proyectoministerio.stockvacuna
@@ -356,10 +406,12 @@ CREATE TABLE IF NOT EXISTS `stockvacuna` (
   PRIMARY KEY (`id`),
   KEY `id_vacuna` (`id_vacuna`),
   CONSTRAINT `id_vacuna` FOREIGN KEY (`id_vacuna`) REFERENCES `vacuna` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Dumping data for table proyectoministerio.stockvacuna: ~0 rows (approximately)
+-- Dumping data for table proyectoministerio.stockvacuna: ~1 rows (approximately)
 /*!40000 ALTER TABLE `stockvacuna` DISABLE KEYS */;
+REPLACE INTO `stockvacuna` (`id`, `lote`, `cantidad`, `fecha_ingreso`, `fecha_expiracion`, `id_vacuna`, `dosis`) VALUES
+	(1, 3, '14', '2019-01-05 06:56:45', '2019-04-12 06:56:56', 6, 34);
 /*!40000 ALTER TABLE `stockvacuna` ENABLE KEYS */;
 
 -- Dumping structure for table proyectoministerio.vacuna
