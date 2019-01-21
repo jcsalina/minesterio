@@ -105,7 +105,7 @@
                                     <div class="col-md-12 no-padding">
                                         <div class="col-md-6 no-padding">
                                             <span class="col-md-5 no-padding"><b>Fecha de Nacimiento: </b></span>
-                                            <span class="col-md-6 no-padding"><?php echo $paciente_fecha_nacimiento ?></span>
+                                            <span class="col-md-6 no-padding"><?php echo $paciente_fecha_nacimiento ?> (<?php echo $paciente_edad ?> años)</span>
                                         </div>
                                         <div class="col-md-6 no-padding">
                                             <span class="col-md-5 no-padding"><b>Sexo: </b></span>
@@ -145,68 +145,101 @@
                                 <?php } else { ?>
                                     <span>Ingrese Numero de Cédula <br> <br></span>
                                 <?php } ?>
+                                <?php include '../../pdo/procesos/historial/registrar.php';?>
+                                <form id="control_form" class="col-sm-12" role="form" action="" method="post" name="control_form">
+                                    
+                                    <h4>Tabla de Control</h4>
+                                    <div class="table-responsive">
+                                    
+                                        <table class="table table-bordered table-hover">
+                                            <thead class="success">
+                                                <tr>
+                                                    <th>BCG</th>
+                                                    <th>HBO</th>
+                                                    <th>Rotavirus 1</th>
+                                                    <th>Rotavirus 2</th>
+                                                    <th>Pentavalente 1</th>
+                                                    <th>Pentavalente 2</th>
+                                                    <th>Pentavalente 3</th>
+                                                    <th>Poliomielitis 1</th>
+                                                    <th>Poliomielitis 2</th>
+                                                    <th>Poliomielitis 3</th>
+                                                    <th>Neumococo 1</th>
+                                                    <th>Neumococo 2</th>
+                                                    <th>Neumococo 3</th>
+                                                    <th>SR</th>
+                                                    <th>SRP</th>
+                                                    <th>Varicela</th>
+                                                    <th>FA</th>
+                                                    <th>OPV</th>
+                                                    <th>Influenza</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php include '../../pdo/procesos/historial/tabla_control.php';?>
+                                            </tbody>
+                                        </table>
+                                    </div>
 
-                                <h4>Tabla de Control</h4>
-                                <div class="table-responsive">
+                                    <br>
+                               
                                 
-                                    <table class="table table-bordered table-hover">
-                                        <thead class="success">
-                                            <tr>
-                                                <th>BCG</th>
-                                                <th>HBO</th>
-                                                <th>Rotavirus 1</th>
-                                                <th>Rotavirus 2</th>
-                                                <th>Pentavalente 1</th>
-                                                <th>Pentavalente 2</th>
-                                                <th>Pentavalente 3</th>
-                                                <th>Poliomielitis 1</th>
-                                                <th>Poliomielitis 2</th>
-                                                <th>Poliomielitis 3</th>
-                                                <th>Neumococo 1</th>
-                                                <th>Neumococo 2</th>
-                                                <th>Neumococo 3</th>
-                                                <th>SR</th>
-                                                <th>SRP</th>
-                                                <th>Varicela</th>
-                                                <th>FA</th>
-                                                <th>OPV</th>
-                                                <th>Influenza</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php include '../../pdo/procesos/historial/tabla_control.php';?>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                    <!-- Notificaciones -->
+                                    <span class="text-success"><?php if (isset($successmsg_historial)) { echo $successmsg_historial; } ?></span>
+                                    <span class="text-danger"><?php if (isset($errormsg_historial)) { echo $errormsg_historial; } ?></span>
+                                    <!-- EO / Notificaciones -->
+                                    <h4>Campaña</h4>
+                                    
+                                    <div class="col-sm-4 form-group">
+                                        <label>Nombre<span class="text-danger req-mark">*</span></label>
+                                        <?php
+                                            if (isset($paciente_edad)) {
+                                                $campana = "SELECT * FROM campana WHERE campana.edad >= $paciente_edad";
+                                                $stmt_campana = $pdo->query( $campana );
+    
+                                                $dropdown = "<select name='campana' class='form-control'>";
+                                                foreach ($stmt_campana as $row) {
+                                                    $dropdown .= "\r\n<option value='{$row['id']}'>{$row['nombre']}</option>";
+                                                }
+                                                $dropdown .= "\r\n</select>";
+                                                echo $dropdown;
+                                            } else {
+                                                $dropdown = "<select name='campana' class='form-control'>";
+                                                $dropdown .= "\r\n<option value='0'>---</option>";
+                                                $dropdown .= "\r\n</select>";
+                                                echo $dropdown;
+                                            }
+                                        ?>
+                                        <span class="text-danger validation-error"><?php if (isset($campana_error)) echo $campana_error; ?></span>
+                                    </div>
 
-                                <br>
-                                <h4>Campaña</h4>
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-hover">
-                                        <thead class="success">
-                                            <tr>
-                                                <th>Nombre</th>
-                                                <th>Fecha</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <td>Vacuna Influencia</td>
-                                            <td>12-Dic-2018</td>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                    <div class="col-sm-4 form-group">
+                                        <label>Fecha<span class="text-danger req-mark">*</span></label>
+                                        <input type="date" name="fecha" id="fecha" class="form-control" style="border-right: none;" value="">
+                                        <span class="text-danger validation-error"><?php if (isset($fecha_error)) echo $fecha_error; ?></span>
+                                    </div>
 
-                                <br>
-                                <h4>¿Recibió tratamiento completo?</h4>
-                                <select name="boolean_tratamiento" id="boolean_tratamiento" class="form-control">
-                                    <option value="1">Si</option>
-                                    <option value="0">No</option>
-                                </select>
+                                    <div class="col-sm-4 form-group">
+                                        <label>¿Recibió tratamiento completo?<span class="text-danger req-mark">*</span></label>
+                                        <select name="boolean_tratamiento" id="boolean_tratamiento" class="form-control">
+                                            <option value="1">Si</option>
+                                            <option value="0">No</option>
+                                        </select>
+                                    </div>
 
-                                <br>
-                                <div class="col-sm-12 reset-button">
-                                    <input type="submit" name="signup" id="signup" value="Guardar" class="btn btn-success" />
-                                </div>
+                                    <!-- <br>
+                                    <h4>¿Recibió tratamiento completo?</h4>
+                                    <select name="boolean_tratamiento" id="boolean_tratamiento" class="form-control">
+                                        <option value="1">Si</option>
+                                        <option value="0">No</option>
+                                    </select> -->
+
+                                    <br>
+                                    <div class="col-sm-12 reset-button">
+                                        <input type="submit" name="submit_historial" id="submit_historial" value="Guardar" class="btn btn-success" />
+                                    </div>
+                                </form>
+                                
                                 <!-- Paginacion -->
                             </div>
                         </div>
@@ -267,6 +300,10 @@
                 xmlhttp.open("GET", "consulta_por_cedula.php?cedula=" + str, true);
                 xmlhttp.send();
             }
+        }
+
+        function upload_vacuna() {
+
         }
     </script>
 </body>

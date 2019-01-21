@@ -45,4 +45,9 @@
     margin-right: 7px;
 }
 
-
+.cardbox {
+    background-color: #17c0c3 !important;
+}
+.cardbox:hover {
+    background-color: #222d32 !important;
+}
