@@ -1,3 +1,41 @@
+<<<<<<< HEAD
+=======
+<?php
+session_start();
+
+if(isset($_SESSION['usr_id'])!="") {
+	header("Location: index.php");
+}
+
+include_once 'database/dbconnect.php';
+
+//Comprobar de envío el formulario
+if (isset($_POST['login'])) {
+
+	$cedula_persona  = mysqli_real_escape_string($con, $_POST['cedula_persona']);
+	$clave           = mysqli_real_escape_string($con, $_POST['clave']);
+    
+    $result     = mysqli_query($con, "SELECT * FROM empleado WHERE cedula_persona = '" . $cedula_persona. "' and clave = '" .$clave . "'");
+
+
+	if ($row = mysqli_fetch_array($result)) {
+		//$_SESSION['usr_estado'] = $row['estado'];
+
+		if($row['estado']=="1") {
+			$_SESSION['usr_id']     = $row['id'];
+            $_SESSION['usr_name']   = $row['usuario'];
+			
+			header("Location: index.php");
+        } 
+        else
+		    $errormsg = "Esta cuenta esta desactivada";
+	} else {
+		$errormsg = "Revise sus datos" . $row['estado'];
+	}
+}
+?>
+
+>>>>>>> Nueva Actualizacion
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,16 +85,23 @@
                             <input type="text" placeholder="9999999999" title="Ingrese su número de cédula" required="" value="" name="cedula_persona" id="cedula_persona" class="form-control">
                             <span class="help-block small">Número de Cédula</span>
                         </div>
+<<<<<<< HEAD
                         <div class="form-group add-on">
                             <label class="control-label" for="password">Contraseña</label>
                             <div class="input-group add-on" style="display: flex;">
                                 <input type="password" title="Ingrese su contraseña" placeholder="******" required="" value="" name="clave" id="clave" class="form-control" style="border-right: none;">
                                 <span toggle="#clave" class="btn btn-default" onclick="togglePassword(this)" style="border-left: none;"><i class="glyphicon glyphicon-eye-open"></i></button>
                             </div>
+=======
+                        <div class="form-group">
+                            <label class="control-label" for="password">Contraseña</label>
+                            <input type="password" title="Ingrese su contraseña" placeholder="******" required="" value="" name="clave" id="clave" class="form-control">
+>>>>>>> Nueva Actualizacion
                             <span class="help-block small">Contraseña</span>
                         </div>
                         <div>
                             <input class="btn btn-primary" type="submit" name="login" value="Iniciar Sesión" class="btn btn-primary" />
+<<<<<<< HEAD
                             <a class="btn btn-warning" href="app/register.php">Registrar</a>
                         </div>
                     </form>
@@ -69,6 +114,11 @@
                         }
                     
                     ?>
+=======
+                            <a class="btn btn-warning" href="register.php">Registrar</a>
+                        </div>
+                    </form>
+>>>>>>> Nueva Actualizacion
                 </div>
             </div>
         </div>
@@ -78,6 +128,9 @@
     <script src="assets/plugins/jQuery/jquery-1.12.4.min.js" type="text/javascript"></script>
     <!-- bootstrap js -->
     <script src="assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<<<<<<< HEAD
     <script src="js/app.js" type="text/javascript"></script>
+=======
+>>>>>>> Nueva Actualizacion
 </body>
 </html>

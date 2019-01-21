@@ -1,5 +1,10 @@
 <?php
+<<<<<<< HEAD
     include "/pdo/procesos/seguridad.php";
+=======
+    session_start();
+    include_once 'database/dbconnect.php';
+>>>>>>> Nueva Actualizacion
 ?>
 
 <!DOCTYPE html>
@@ -54,10 +59,17 @@
     <body class="hold-transition sidebar-mini">
         <!-- Site wrapper -->
         <div class="wrapper">
+<<<<<<< HEAD
             <?php include '/app/general/principal_header.php';?>
             <!-- =============================================== -->
             <!-- Menu Principal -->
             <?php include '/app/general/principal_menu.php';?>
+=======
+            <?php include 'principal_header.php';?>
+            <!-- =============================================== -->
+            <!-- Menu Principal -->
+            <?php include 'principal_menu.php';?>
+>>>>>>> Nueva Actualizacion
             <!-- =============================================== -->
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
