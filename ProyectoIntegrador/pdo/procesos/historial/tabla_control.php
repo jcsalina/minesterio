@@ -16,9 +16,9 @@ if(isset($_GET['cedula'])){
     $control_lista=$pdo->prepare("  SELECT *
                                     FROM control
                                     LEFT JOIN paciente 
-                                        ON control.paciente_id = paciente.id 
-                                    WHERE paciente.cedula_persona=:cedula_persona OR paciente.cedula_madre=:cedula_persona OR paciente.cedula_padre=:cedula_persona");
-    $control_lista->bindParam(":cedula_persona", $cedula);
+                                        ON control.paciente_id = paciente.id");
+    //                                WHERE paciente.cedula_persona=:cedula_persona OR paciente.cedula_madre=:cedula_persona OR paciente.cedula_padre=:cedula_persona");
+    // $control_lista->bindParam(":cedula_persona", $cedula);
     $control_lista->execute();
     
 
@@ -100,6 +100,7 @@ if(isset($_GET['cedula'])){
         }
     } else {
         echo $tabla_sin_datos;
+        echo "aaaa";
     }
 } else {
     echo $tabla_sin_datos;

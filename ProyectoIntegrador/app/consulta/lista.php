@@ -46,18 +46,62 @@
             <!-- Main content -->
             <section class="content">
                 <div class="row">
+                    <?php
+                        require_once "../../pdo/php/connect.php";
+                    ?>
                     <div class="col-sm-12">
                         <div class="panel panel-bd lobidrag">
                             <div class="panel-heading">
-                                <div class="btn-group">
+                                <div class="btn-group new-instance-fix-btn">
                                     <a class="btn btn-success" href="registrar.php"> <i class="fa fa-plus"></i> Nueva Consulta</a>
                                 </div>
+                                <?php
+                                    $cedula = '';
+                                    if(isset($_GET['cedula'])){
+                                        $cedula = $_GET['cedula'];
+                                    }
+                                ?>
+                                <!-- Search Form Group -->
+                                <form action="lista.php" method="GET">
+                                    <div class="btn-group col-sm-3 no-padding" style="margin-left:7px;">
+                                        <div class="search-form-group col-md-10 no-padding">
+                                            <input type="date" name="cedula" id="cedula" class="search-control col-md-8" placeholder="Ingrese Fecha" value="<?php echo $cedula ?>">
+                                            <input type="submit" class="btn btn-success col-md-4" value="Buscar">
+                                        </div>
+                                    </div>
+                                </form>
+                                <!-- EO / Search Form Group -->
                             </div>
                             <div class="panel-body">
-                                <!-- Comming Soon! -->
-                                <div style="width: 100%; text-align:center;">
-                                    <h2>Comming Soon!</h2>
-                                    <img src="../../img/sources/working_on_page.gif" alt="Working on it!" style="height: 35vh;margin: 0 auto;margin-bottom: 5vh;">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover">
+                                        <thead class="success">
+                                            <tr>
+                                                <th>BCG</th>
+                                                <th>HBO</th>
+                                                <th>Rotavirus 1</th>
+                                                <th>Rotavirus 2</th>
+                                                <th>Pentavalente 1</th>
+                                                <th>Pentavalente 2</th>
+                                                <th>Pentavalente 3</th>
+                                                <th>Poliomielitis 1</th>
+                                                <th>Poliomielitis 2</th>
+                                                <th>Poliomielitis 3</th>
+                                                <th>Neumococo 1</th>
+                                                <th>Neumococo 2</th>
+                                                <th>Neumococo 3</th>
+                                                <th>SR</th>
+                                                <th>SRP</th>
+                                                <th>Varicela</th>
+                                                <th>FA</th>
+                                                <th>OPV</th>
+                                                <th>Influenza</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php require '../../pdo/procesos/consulta/listar.php';?>
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <!-- Paginacion -->
                             </div>

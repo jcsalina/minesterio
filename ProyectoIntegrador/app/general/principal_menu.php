@@ -71,7 +71,7 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="/ProyectoIntegrador/app/citamedica/registrar.php">Registrar Cita</a></li>
+                    <!-- <li><a href="/ProyectoIntegrador/app/citamedica/registrar.php">Registrar Cita</a></li> -->
                     <li><a href="/ProyectoIntegrador/app/citamedica/lista.php">Lista Citas</a></li>
                 </ul>
             </li>
@@ -92,7 +92,7 @@
                     <i class="fa fa-file-text"></i><span>Consultas</span>
                 </a>
             </li>
-            <li class="treeview">
+            <!-- <li class="treeview">
                 <a href="#">
                     <i class="fa fa-files-o"></i><span>Reportes</span>
                     <span class="pull-right-container">
@@ -103,7 +103,7 @@
                     <li><a href="/ProyectoIntegrador/app/reporte/reporte1.php">Reporte 1</a></li>
                     <li><a href="/ProyectoIntegrador/app/reporte/reporte2.php">Reporte 2</a></li>
                 </ul>
-            </li>
+            </li> -->
         </ul>
         <!-- /.sidebar -->
 

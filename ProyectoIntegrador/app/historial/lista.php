@@ -302,9 +302,6 @@
             }
         }
 
-        function upload_vacuna() {
-
-        }
     </script>
 </body>
 
